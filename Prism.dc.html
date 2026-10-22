@@ -1,0 +1,313 @@
+<!doctype html>
+<meta charset="utf-8"><style data-dc-design-system-vars>@layer{:root{--bg:#131217;--surface:#1a1920;--surface-raised:#222029;--border:#3a3744;--border-strong:#716c7e;--ink:#ece9f1;--ink-muted:#a8a4b4;--ink-faint:#8b879a;--accent:#a99bc4;--accent-strong:#c4b8dc;--on-accent:#16141a;--viol-1:#504654;--accent-subtle:#2b2635;--success:#8fbf9f;--danger:#e0909c;--shadow-float:0 12px 32px 0 #00000073;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--space-12:48px;--space-16:64px;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-full:999px;--font-verdana:Verdana, Geneva, sans-serif;--text-display:400 48px/1.1 var(--font-verdana);--text-heading-1:400 30px/1.2 var(--font-verdana);--text-heading-2:400 22px/1.3 var(--font-verdana);--text-heading-3:700 17px/1.4 var(--font-verdana);--text-body:400 16px/1.5 var(--font-verdana);--text-body-small:400 14px/1.5 var(--font-verdana);--text-label:700 12px/1.3 var(--font-verdana);}}</style>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tohri — prism</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&amp;display=swap">
+<style>
+body{margin:0;background:#0b0716;}
+a{color:#c9a8ff;transition:color 150ms ease;}
+a:hover{color:#ffffff;}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #ffffff;outline-offset:3px;}
+
+.fx-bg{background:
+radial-gradient(45% 40% at 15% 20%, #9d5cff88 0%, transparent 70%),
+radial-gradient(35% 40% at 85% 15%, #c026d366 0%, transparent 70%),
+radial-gradient(50% 45% at 70% 80%, #6d28d999 0%, transparent 70%),
+radial-gradient(30% 30% at 25% 85%, #3df5ff26 0%, transparent 70%),
+radial-gradient(60% 50% at 50% 50%, #2e106599 0%, transparent 80%),
+#0b0716;
+background-size:160% 160%;animation:fx-drift 18s ease-in-out infinite alternate;}
+@keyframes fx-drift{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+
+.fx-shard{position:absolute;mix-blend-mode:screen;opacity:.85;animation:fx-float 5s ease-in-out infinite alternate, fx-hue 3.5s ease-in-out infinite alternate;will-change:transform,filter,opacity;}
+@keyframes fx-float{0%{transform:translate3d(-30px,30px,0) rotate(-12deg) scale(.92)}50%{transform:translate3d(20px,-20px,0) rotate(4deg) scale(1.04)}100%{transform:translate3d(50px,-70px,0) rotate(20deg) scale(1.12)}}
+@keyframes fx-hue{0%{filter:hue-rotate(-45deg) brightness(.85);opacity:.55}50%{opacity:.95}100%{filter:hue-rotate(45deg) brightness(1.5);opacity:.8}}
+
+.fx-title{font-family:Unbounded, Verdana, sans-serif;font-weight:900;letter-spacing:-0.04em;line-height:.9;
+background:linear-gradient(100deg,#ffffff 0%,#d4b8ff 14%,#9d5cff 28%,#f5edff 42%,#d946ef 56%,#7c3aed 70%,#3df5ff 80%,#e9ddff 90%,#ffffff 100%);
+background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:fx-sheen 6s linear infinite;
+-webkit-box-reflect:below -0.12em linear-gradient(transparent 45%, #ffffff40);
+filter:drop-shadow(-4px 0 0 #d946efaa) drop-shadow(4px 0 0 #6d28d9cc) drop-shadow(0 0 40px #9d5cff99);}
+@keyframes fx-sheen{0%{background-position:0% 0}100%{background-position:250% 0}}
+
+.fx-glitch{text-shadow:-2px 0 #d946ef, 2px 0 #7c3aed, 0 0 24px #9d5cffaa;}
+
+.fx-glass{position:relative;overflow:hidden;background:#1a0b33bf;backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%);border:1px solid #c9a8ff4d;box-shadow:inset 0 1px 0 #f5edff55, 0 0 0 1px #9d5cff40, 0 20px 60px #6d28d955, 0 0 90px #9d5cff33;}
+.fx-glass::before{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 42%,#ffffff26 48%,#c4a1ff2e 50%,#d946ef22 52%,transparent 58%);animation:fx-glint 5s ease-in-out infinite;pointer-events:none;}
+@keyframes fx-glint{0%{transform:translateX(-40%)}60%,100%{transform:translateX(40%)}}
+
+.fx-cover{position:relative;overflow:hidden;background:
+conic-gradient(from 210deg at 35% 40%, #2e1065, #7c3aed, #c4a1ff, #f5edff, #9d5cff, #d946ef, #4c1d95, #3df5ff 88%, #2e1065);}
+.fx-cover::after{content:"";position:absolute;inset:0;background:
+linear-gradient(32deg, transparent 49.4%, #ffffffcc 49.6%, transparent 50%),
+linear-gradient(118deg, transparent 49.4%, #ffffffaa 49.6%, transparent 50%),
+linear-gradient(74deg, transparent 49.5%, #0b0716 49.7%, transparent 50.2%),
+linear-gradient(160deg, transparent 49.5%, #ffffff88 49.7%, transparent 50%);
+mix-blend-mode:overlay;}
+.fx-cover:hover{animation:fx-hue 2s linear infinite;}
+
+.fx-btn{background:linear-gradient(100deg,#b98bff,#e9ddff,#c084fc,#d4b8ff,#b98bff);background-size:300% 100%;animation:fx-sheen 4s linear infinite;color:#0b0716;box-shadow:0 0 24px #9d5cffcc, 0 0 56px #7c3aed88;}
+.fx-btn:hover{color:#0b0716;box-shadow:0 0 32px #c4a1ff, 0 0 72px #9d5cff;}
+.fx-pill{border:1px solid #c9a8ff66;background:#9d5cff1a;color:#ffffff;}
+.fx-pill:hover{color:#0b0716;background:#c4a1ff;border-color:#c4a1ff;box-shadow:0 0 22px #9d5cff;}
+
+.fx-marquee{animation:fx-scroll 22s linear infinite;}
+@keyframes fx-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+@media (max-width: 640px){
+.fx-hero{min-height:0 !important;}
+.fx-hero-in{padding:64px 20px 72px !important;gap:24px !important;}
+.fx-shard:nth-child(n+13){display:none;}
+.fx-shard{animation-duration:9s,7s;}
+.fx-glass{backdrop-filter:blur(10px) saturate(150%);-webkit-backdrop-filter:blur(10px) saturate(150%);}
+.fx-release{padding:18px !important;gap:20px !important;border-radius:18px !important;}
+.fx-contact{padding:32px 20px !important;gap:32px !important;border-radius:20px !important;}
+section{padding-left:16px !important;padding-right:16px !important;}
+.fx-title{-webkit-box-reflect:below -0.1em linear-gradient(transparent 55%, #ffffff33);}
+}
+.fx-still *, .fx-still *::before, .fx-still *::after{animation:none !important;}
+@media (prefers-reduced-motion: reduce){.fx-root *, .fx-root *::before, .fx-root *::after{animation:none !important;}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="background: #0b0716; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; line-height: 1.5; overflow: hidden;">
+
+<header style="position: relative; z-index: 5; border-bottom: 1px solid #ffffff26; background: #0b0716cc; backdrop-filter: blur(10px);">
+<div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+<a href="#top" class="fx-glitch" style="color: #ffffff; text-decoration: none; font-family: Unbounded, Verdana, sans-serif; font-size: 18px; font-weight: 900; letter-spacing: 0.08em;">TOHRI</a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;">
+<a href="#music" style="color: #ffffff; text-decoration: none;">Music</a>
+<a href="#sets" style="color: #ffffff; text-decoration: none;">Sets</a>
+<a href="#shows" style="color: #ffffff; text-decoration: none;">Shows</a>
+<a href="#about" style="color: #ffffff; text-decoration: none;">About</a>
+<a href="#contact" style="color: #ffffff; text-decoration: none;">Contact</a>
+</nav>
+</div>
+</header>
+
+<main id="top">
+
+<section class="fx-bg fx-hero" style="position: relative; min-height: 860px; overflow: hidden; border-bottom: 1px solid #ffffff26;">
+<div aria-hidden="true" style="position: absolute; inset: 0; filter: hue-rotate({{hue}}deg);">
+<sc-for list="{{shards}}" as="s" hint-placeholder-count="26">
+<div class="fx-shard" style="left: {{s.x}}%; top: {{s.y}}%; width: {{s.w}}px; height: {{s.h}}px; clip-path: {{s.clip}}; background: {{s.bg}}; animation-delay: {{s.d}}s, {{s.d2}}s;"></div>
+</sc-for>
+</div>
+
+<div class="fx-hero-in" style="position: relative; z-index: 6; max-width: 1240px; margin: 0 auto; padding: 120px 24px 96px; display: flex; flex-direction: column; gap: 32px;">
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<span class="fx-glass" style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px;">Color bass</span>
+<span class="fx-glass" style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px;">J-core</span>
+</div>
+<h1 class="fx-title" style="margin: 0; font-size: clamp(56px, 17vw, 220px);">TOHRI</h1>
+<p class="fx-glitch" style="margin: 40px 0 0; font-family: Unbounded, Verdana, sans-serif; font-size: clamp(22px, 3vw, 36px); font-weight: 400; line-height: 1.2;">aka &lt;Tori&gt;</p>
+<div class="fx-glass" style="max-width: 520px; border-radius: 16px; padding: 20px 24px;">
+<p style="margin: 0; position: relative;">Color bass and j-core. Supersaw chords cut into shards, breaks at full speed, light bouncing everywhere.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px;">
+<a href="#music" class="fx-btn" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; box-sizing: border-box; padding: 0 26px; border-radius: 12px; text-decoration: none; font-family: Unbounded, Verdana, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.04em;">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v9l7-4.5-7-4.5z"></path></svg>
+Listen now
+</a>
+<a href="#contact" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 52px; box-sizing: border-box; padding: 0 26px; border-radius: 12px; text-decoration: none; font-family: Unbounded, Verdana, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.04em;">Booking</a>
+</div>
+</div>
+</section>
+
+<div aria-hidden="true" style="position: relative; z-index: 3; margin-top: -28px; background: linear-gradient(90deg,#b98bff,#e9ddff,#c084fc,#d4b8ff,#a78bfa,#f0abfc,#b98bff); clip-path: polygon(0 18%, 6% 0, 13% 22%, 21% 4%, 30% 26%, 38% 2%, 47% 20%, 55% 0, 64% 24%, 72% 6%, 81% 22%, 90% 0, 100% 16%, 100% 84%, 93% 100%, 85% 78%, 76% 96%, 67% 74%, 58% 100%, 49% 80%, 40% 98%, 31% 76%, 22% 100%, 13% 78%, 5% 96%, 0 82%); padding: 26px 0; overflow: hidden;">
+<div class="fx-marquee" style="display: flex; width: max-content; gap: 40px; font-family: Unbounded, Verdana, sans-serif; font-size: 28px; font-weight: 900; color: #0b0716; letter-spacing: 0.02em; white-space: nowrap;">
+<span>COLOR BASS</span><span>◇</span><span>J-CORE</span><span>◇</span><span>TOHRI</span><span>◇</span><span>&lt;TORI&gt;</span><span>◇</span><span>COLOR BASS</span><span>◇</span><span>J-CORE</span><span>◇</span><span>TOHRI</span><span>◇</span><span>&lt;TORI&gt;</span><span>◇</span>
+<span>COLOR BASS</span><span>◇</span><span>J-CORE</span><span>◇</span><span>TOHRI</span><span>◇</span><span>&lt;TORI&gt;</span><span>◇</span><span>COLOR BASS</span><span>◇</span><span>J-CORE</span><span>◇</span><span>TOHRI</span><span>◇</span><span>&lt;TORI&gt;</span><span>◇</span>
+</div>
+</div>
+
+<section id="music" class="fx-bg" style="position: relative; padding: 96px 24px 64px;">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px;">
+<h2 class="fx-glitch" style="margin: 0; font-family: Unbounded, Verdana, sans-serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1; letter-spacing: -0.03em;">MUSIC</h2>
+<a href="#" style="font-size: 14px;">All releases on [PLATFORM]</a>
+</div>
+
+<article class="fx-glass fx-release" style="border-radius: 24px; padding: 28px; display: flex; flex-wrap: wrap; gap: 36px; align-items: center;">
+<div class="fx-cover" style="flex: 0 1 340px; aspect-ratio: 1 / 1; border-radius: 14px; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box; box-shadow: 0 0 60px #9d5cffaa, 0 0 140px #6d28d977;">
+<span style="position: relative; z-index: 1; background: #0b0716d9; color: #ffffff; font-size: 13px; padding: 6px 10px; border-radius: 6px;">[COVER]</span>
+</div>
+<div style="position: relative; flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #d4b8ff;">Latest release</span>
+<h3 style="margin: 0; font-family: Unbounded, Verdana, sans-serif; font-size: 34px; font-weight: 700; line-height: 1.1;">[RELEASE TITLE]</h3>
+<p style="margin: 0; font-size: 14px; color: #ddd8f0;">[EP / SINGLE] · [YEAR] · [LABEL OR SELF-RELEASED]</p>
+<p style="margin: 0; color: #ddd8f0; max-width: 520px;">[One or two sentences about the release.]</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px;">
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">SoundCloud</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">Bandcamp</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">Spotify</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">Yandex Music</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">YouTube</a>
+</div>
+</div>
+</article>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 24px 16px;">
+<a href="#" style="display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #ffffff;">
+<div class="fx-cover" style="aspect-ratio: 1 / 1; border-radius: 16px; filter: hue-rotate(18deg); box-shadow: 0 0 50px #9d5cff88;"></div>
+<div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[TITLE]</span><span style="font-size: 14px; color: #ddd8f0;">[SINGLE] · [YEAR]</span></div>
+</a>
+<a href="#" style="display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #ffffff;">
+<div class="fx-cover" style="aspect-ratio: 1 / 1; border-radius: 16px; filter: hue-rotate(-24deg); box-shadow: 0 0 50px #7c3aed88;"></div>
+<div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[TITLE]</span><span style="font-size: 14px; color: #ddd8f0;">[EP] · [YEAR]</span></div>
+</a>
+<a href="#" style="display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #ffffff;">
+<div class="fx-cover" style="aspect-ratio: 1 / 1; border-radius: 16px; filter: hue-rotate(40deg) saturate(1.3); box-shadow: 0 0 50px #d946ef77;"></div>
+<div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[TITLE]</span><span style="font-size: 14px; color: #ddd8f0;">[REMIX] · [YEAR]</span></div>
+</a>
+<a href="#" style="display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #ffffff;">
+<div class="fx-cover" style="aspect-ratio: 1 / 1; border-radius: 16px; filter: hue-rotate(-45deg) brightness(1.1); box-shadow: 0 0 50px #c4a1ff77;"></div>
+<div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[TITLE]</span><span style="font-size: 14px; color: #ddd8f0;">[COLLAB] · [YEAR]</span></div>
+</a>
+</div>
+</div>
+</section>
+
+<section id="sets" style="position: relative; padding: 64px 24px; background: linear-gradient(180deg,#0b0716,#1e0b3d 50%,#0b0716);">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
+<h2 class="fx-glitch" style="margin: 0; font-family: Unbounded, Verdana, sans-serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1; letter-spacing: -0.03em;">SETS</h2>
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<a href="#" class="fx-glass" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 18px 22px; border-radius: 16px; color: #ffffff; text-decoration: none;">
+<span class="fx-btn" style="position: relative; width: 48px; height: 48px; flex: 0 0 48px; border-radius: 999px; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v9l7-4.5-7-4.5z"></path></svg></span>
+<span style="position: relative; flex: 1 1 280px; min-width: 0; font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[MIX TITLE] — color bass hour</span>
+<span style="position: relative; font-size: 14px; color: #ddd8f0;">[PLATFORM]</span>
+<span style="position: relative; font-size: 14px; color: #d4b8ff; min-width: 64px; text-align: right;">[60:00]</span>
+</a>
+<a href="#" class="fx-glass" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 18px 22px; border-radius: 16px; color: #ffffff; text-decoration: none;">
+<span class="fx-btn" style="position: relative; width: 48px; height: 48px; flex: 0 0 48px; border-radius: 999px; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v9l7-4.5-7-4.5z"></path></svg></span>
+<span style="position: relative; flex: 1 1 280px; min-width: 0; font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[MIX TITLE] — j-core set</span>
+<span style="position: relative; font-size: 14px; color: #ddd8f0;">[PLATFORM]</span>
+<span style="position: relative; font-size: 14px; color: #d4b8ff; min-width: 64px; text-align: right;">[45:00]</span>
+</a>
+<a href="#" class="fx-glass" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 18px 22px; border-radius: 16px; color: #ffffff; text-decoration: none;">
+<span class="fx-btn" style="position: relative; width: 48px; height: 48px; flex: 0 0 48px; border-radius: 999px; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v9l7-4.5-7-4.5z"></path></svg></span>
+<span style="position: relative; flex: 1 1 280px; min-width: 0; font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[MIX TITLE] — live at [VENUE]</span>
+<span style="position: relative; font-size: 14px; color: #ddd8f0;">[PLATFORM]</span>
+<span style="position: relative; font-size: 14px; color: #d4b8ff; min-width: 64px; text-align: right;">[90:00]</span>
+</a>
+</div>
+</div>
+</section>
+
+<section id="shows" class="fx-bg" style="position: relative; padding: 64px 24px;">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
+<h2 class="fx-glitch" style="margin: 0; font-family: Unbounded, Verdana, sans-serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1; letter-spacing: -0.03em;">SHOWS</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px;">
+<div class="fx-glass" style="border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 12px; clip-path: polygon(0 0, 92% 0, 100% 14%, 100% 100%, 8% 100%, 0 86%);">
+<span style="position: relative; font-family: Unbounded, Verdana, sans-serif; font-size: 40px; font-weight: 900; line-height: 1; color: #3df5ff;">[DD]</span>
+<span style="position: relative; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e9ddff;">[MONTH YEAR]</span>
+<span style="position: relative; font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[CITY] · [VENUE]</span>
+<span style="position: relative; font-size: 14px; color: #ddd8f0;">[EVENT NAME]</span>
+<a href="#" class="fx-btn" style="position: relative; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 18px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 700;">Tickets</a>
+</div>
+<div class="fx-glass" style="border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 12px; clip-path: polygon(0 0, 92% 0, 100% 14%, 100% 100%, 8% 100%, 0 86%);">
+<span style="position: relative; font-family: Unbounded, Verdana, sans-serif; font-size: 40px; font-weight: 900; line-height: 1; color: #d4b8ff;">[DD]</span>
+<span style="position: relative; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e9ddff;">[MONTH YEAR]</span>
+<span style="position: relative; font-family: Unbounded, Verdana, sans-serif; font-weight: 700;">[CITY] · [VENUE]</span>
+<span style="position: relative; font-size: 14px; color: #ddd8f0;">[EVENT NAME]</span>
+<a href="#" class="fx-btn" style="position: relative; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 18px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 700;">Tickets</a>
+</div>
+<div class="fx-glass" style="border-radius: 20px; padding: 24px; display: flex; flex-direction: column; justify-content: center; gap: 12px; clip-path: polygon(0 0, 92% 0, 100% 14%, 100% 100%, 8% 100%, 0 86%);">
+<span style="position: relative; font-family: Unbounded, Verdana, sans-serif; font-size: 22px; font-weight: 700; line-height: 1.2;">Your party next?</span>
+<a href="#contact" style="position: relative; font-size: 14px;">Write for booking</a>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about" style="position: relative; padding: 64px 24px; background: #0b0716;">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
+<div class="fx-cover" aria-hidden="true" style="flex: 1 1 320px; aspect-ratio: 4 / 5; max-width: 440px; border-radius: 24px; clip-path: polygon(8% 0, 100% 4%, 94% 62%, 100% 100%, 12% 96%, 0 40%); box-shadow: 0 0 80px #9d5cff88;"></div>
+<div style="flex: 2 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px; max-width: 660px;">
+<h2 class="fx-glitch" style="margin: 0; font-family: Unbounded, Verdana, sans-serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1; letter-spacing: -0.03em;">ABOUT</h2>
+<p style="margin: 0; font-size: 20px; line-height: 1.4;">Tohri, also written &lt;Tori&gt;, is a producer working between color bass and j-core.</p>
+<p style="margin: 0; color: #ddd8f0;">[Where you are based, when you started, what shapes the sound: games, anime, rhythm-game music, other artists.]</p>
+<p style="margin: 0; color: #ddd8f0;">[Labels, collectives, notable releases or shows, if any.]</p>
+<p style="margin: 0;">[ARTIST PHOTO goes in the crystal on the left.]</p>
+<a href="#" style="font-size: 14px;">Download press kit [PDF]</a>
+</div>
+</div>
+</section>
+
+<section id="contact" class="fx-bg" style="position: relative; padding: 64px 24px 112px;">
+<div class="fx-glass fx-contact" style="max-width: 1240px; margin: 0 auto; box-sizing: border-box; border-radius: 28px; padding: 56px 32px; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between;">
+<div style="position: relative; flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<h2 class="fx-glitch" style="margin: 0; font-family: Unbounded, Verdana, sans-serif; font-size: clamp(32px, 4.5vw, 56px); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em;">BOOKING</h2>
+<p style="margin: 0; color: #ddd8f0;">Shows, collabs and remixes:</p>
+<a href="mailto:you@example.com" style="font-family: Unbounded, Verdana, sans-serif; font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; line-height: 1.2; word-break: break-all;">[YOUR EMAIL]</a>
+</div>
+<div style="position: relative; flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #d4b8ff;">Elsewhere</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">SoundCloud</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">Bandcamp</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">Telegram</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">Instagram</a>
+<a href="#" class="fx-pill" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 999px; text-decoration: none; font-size: 14px;">X</a>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer style="border-top: 1px solid #ffffff26; background: #0b0716;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #b9b3cc;">
+<span>© 2026 Tohri &lt;Tori&gt;</span>
+<span>Color bass ◇ J-core</span>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"shardCount":{"editor":"range","default":26,"min":8,"max":48,"step":1,"section":"Effects"},"hue":{"editor":"range","default":0,"min":0,"max":360,"step":5,"unit":"deg","section":"Effects"},"motion":{"editor":"boolean","default":true,"section":"Effects"},"$preview":{"width":1440,"height":4900}}'>
+class Component extends DCLogic {
+renderVals() {
+const n = this.props.shardCount ?? 26;
+const motion = this.props.motion ?? true;
+const pal = ['#9d5cff', '#7c3aed', '#c4a1ff', '#e9ddff', '#6d28d9', '#d946ef', '#a78bfa', '#4c1d95', '#ffffff', '#c026d3', '#3df5ff'];
+const r = (i, k) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+const shards = [];
+for (let i = 0; i < n; i++) {
+const pts = [];
+const corners = 3 + Math.floor(r(i, 9) * 3);
+for (let p = 0; p < corners; p++) {
+const a = (p / corners) * Math.PI * 2 + r(i, p + 20) * 0.9;
+const rad = 30 + r(i, p + 40) * 20;
+pts.push(Math.round(50 + Math.cos(a) * rad) + '% ' + Math.round(50 + Math.sin(a) * rad) + '%');
+}
+const c1 = pal[Math.floor(r(i, 3) * pal.length)];
+const c2 = pal[Math.floor(r(i, 4) * pal.length)];
+const ang = Math.round(r(i, 5) * 360);
+shards.push({
+x: Math.round(r(i, 1) * 110 - 10),
+y: Math.round(r(i, 2) * 100 - 10),
+w: Math.round(90 + r(i, 6) * 300),
+h: Math.round(90 + r(i, 7) * 300),
+clip: 'polygon(' + pts.join(', ') + ')',
+bg: 'linear-gradient(' + ang + 'deg, ' + c1 + 'ee 0%, ' + c2 + '88 55%, #ffffff00 100%)',
+d: (-r(i, 8) * 7).toFixed(2),
+d2: (-r(i, 10) * 12).toFixed(2)
+});
+}
+return { shards: shards, hue: this.props.hue ?? 0, rootClass: motion ? 'fx-root' : 'fx-root fx-still' };
+}
+}
+</script>
+</body>
+</html>
